@@ -20,6 +20,10 @@ const NAME_ALICE = 'Alice'
 const NAME_BOB = 'Bob'
 const NAME_CHARLIE = 'Charlie'
 
+const ERROR_NO_USERS_LOADED = 'No users loaded!'
+const ERROR_NO_SEARCH_PARAMS = 'No search parameters provoded!'
+const ERROR_NO_MATCHING_USERS = 'No matching users found!'
+
 describe('UserDataHandler Unit Tests', () => {
   let handler
 
@@ -40,7 +44,9 @@ describe('UserDataHandler Unit Tests', () => {
 
   describe('getUserEmailsList()', () => {
     it('should throw an error if no users are loaded', () => {
-      expect(() => handler.getUserEmailsList()).to.throw('No users loaded!')
+      expect(function () {
+        handler.getUserEmailsList()
+      }).to.throw(ERROR_NO_USERS_LOADED)
     })
 
     it('should return semicolon separated emails when users are loaded', () => {
@@ -84,16 +90,22 @@ describe('UserDataHandler Unit Tests', () => {
     ]
 
     it('should throw an error if search parameters are not provided', () => {
-      expect(() => handler.findUsers()).to.throw('No search parameters provoded!')
+      expect(function () {
+        handler.findUsers()
+      }).to.throw(ERROR_NO_SEARCH_PARAMS)
     })
 
     it('should throw an error if no users are loaded during search', () => {
-      expect(() => handler.findUsers({ name: NAME_ALICE })).to.throw('No users loaded!')``
+      expect(function () {
+        handler.findUsers({ name: NAME_ALICE })
+      }).to.throw(ERROR_NO_USERS_LOADED)
     })
 
     it('should throw an error if no matching users found', () => {
       handler.users = sampleUsers
-      expect(() => handler.findUsers({ name: NAME_CHARLIE })).to.throw('No matching users found!')
+      expect(function () {
+        handler.findUsers({ name: NAME_CHARLIE })
+      }).to.throw(ERROR_NO_MATCHING_USERS)
     })
 
     it('should successfully find matching users by search parameters', () => {
