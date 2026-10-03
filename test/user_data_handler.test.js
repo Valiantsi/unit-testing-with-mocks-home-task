@@ -84,11 +84,11 @@ describe('UserDataHandler Unit Tests', () => {
     ]
 
     it('should throw an error if search parameters are not provided', () => {
-      expect(() => handler.findUsers()).to.throw('No search parameters provided!')
+      expect(() => handler.findUsers()).to.throw('No search parameters provoded!')
     })
 
     it('should throw an error if no users are loaded during search', () => {
-      expect(() => handler.findUsers({ name: NAME_ALICE })).to.throw('No users loaded!')
+      expect(() => handler.findUsers({ name: NAME_ALICE })).to.throw('No users loaded!')``
     })
 
     it('should throw an error if no matching users found', () => {
